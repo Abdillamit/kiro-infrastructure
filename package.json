@@ -1,0 +1,30 @@
+{
+  "name": "my-project-infrastructure",
+  "version": "1.0.0",
+  "description": "AWS CDK infrastructure for My Project",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest --coverage",
+    "cdk": "cdk",
+    "deploy:beta": "cdk deploy --app \"node bin/projects/my-service/service.js\" betaMyServiceAPIStack betaMyServiceStorageStack betaMyServiceAuthStack",
+    "deploy:prod": "cdk deploy --app \"node bin/projects/my-service/service.js\" MyServiceAPIStack MyServiceStorageStack MyServiceAuthStack",
+    "diff:beta": "cdk diff --app \"node bin/projects/my-service/service.js\" betaMyServiceAPIStack",
+    "diff:prod": "cdk diff --app \"node bin/projects/my-service/service.js\" MyServiceAPIStack",
+    "synth:beta": "cdk synth --app \"node bin/projects/my-service/service.js\" betaMyServiceAPIStack",
+    "synth:prod": "cdk synth --app \"node bin/projects/my-service/service.js\" MyServiceAPIStack",
+    "synth": "cdk synth --app \"node bin/projects/my-service/service.js\""
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.19",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "^2.133.0",
+    "constructs": "^10.3.0"
+  }
+}

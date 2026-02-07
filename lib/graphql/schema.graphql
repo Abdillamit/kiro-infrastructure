@@ -1,0 +1,13 @@
+type Query {
+  hello: HelloResponse!
+}
+
+type HelloResponse {
+  message: String!
+  stage: String!
+  timestamp: String!
+}
+
+schema {
+  query: Query
+}

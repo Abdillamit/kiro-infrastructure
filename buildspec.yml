@@ -1,0 +1,38 @@
+version: 0.2
+
+env:
+  secrets-manager:
+    GITHUB_TOKEN: arn:aws:secretsmanager:us-west-2:YOUR_ACCOUNT:secret:GithubToken
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 22
+    commands:
+      - npm install
+
+  build:
+    commands:
+      - npm run build
+      - npx cdk synth --app bin/projects/my-service/service.js
+      - npm run test
+
+artifacts:
+  base-directory: cdk.out
+  files:
+    - betaMyServiceAPIStack.template.json
+    - MyServiceAPIStack.template.json
+    - betaMyServiceStorageStack.template.json
+    - MyServiceStorageStack.template.json
+    - betaMyServiceAuthStack.template.json
+    - MyServiceAuthStack.template.json
+
+cache:
+  paths:
+    - node_modules/**/*
+
+reports:
+  jest_reports:
+    files:
+      - ./coverage/clover.xml
+    file-format: CLOVERXML
