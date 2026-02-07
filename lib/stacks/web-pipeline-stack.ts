@@ -41,13 +41,14 @@ export class WebPipelineStack extends cdk.Stack {
           },
           pre_build: {
             commands: [
-              // Используем одинарные кавычки для JMESPath
-              "export GATSBY_GRAPHQL_ENDPOINT=$(aws cloudformation describe-stacks --stack-name betaMyServiceAPIStack --query 'Stacks[0].Outputs[?OutputKey==`GraphQLApiUrl`].OutputValue' --output text)",
-              "export GATSBY_API_KEY=$(aws cloudformation describe-stacks --stack-name betaMyServiceAPIStack --query 'Stacks[0].Outputs[?OutputKey==`GraphQLApiKey`].OutputValue' --output text)",
-              "export GATSBY_USER_POOL_ID=$(aws cloudformation describe-stacks --stack-name betaMyServiceAuthStack --query 'Stacks[0].Outputs[?OutputKey==`UserPoolId`].OutputValue' --output text)",
-              "export GATSBY_USER_POOL_CLIENT_ID=$(aws cloudformation describe-stacks --stack-name betaMyServiceAuthStack --query 'Stacks[0].Outputs[?OutputKey==`UserPoolClientId`].OutputValue' --output text)",
+              // Экспортируем переменные из CloudFormation stacks
+              'export GATSBY_GRAPHQL_ENDPOINT=$(aws cloudformation describe-stacks --stack-name betaMyServiceAPIStack --query "Stacks[0].Outputs[?OutputKey==\\`GraphQLApiUrl\\`].OutputValue" --output text)',
+              'export GATSBY_API_KEY=$(aws cloudformation describe-stacks --stack-name betaMyServiceAPIStack --query "Stacks[0].Outputs[?OutputKey==\\`GraphQLApiKey\\`].OutputValue" --output text)',
+              'export GATSBY_USER_POOL_ID=$(aws cloudformation describe-stacks --stack-name betaMyServiceAuthStack --query "Stacks[0].Outputs[?OutputKey==\\`UserPoolId\\`].OutputValue" --output text)',
+              'export GATSBY_USER_POOL_CLIENT_ID=$(aws cloudformation describe-stacks --stack-name betaMyServiceAuthStack --query "Stacks[0].Outputs[?OutputKey==\\`UserPoolClientId\\`].OutputValue" --output text)',
               'export GATSBY_AWS_REGION=us-west-2',
               'echo "GATSBY_GRAPHQL_ENDPOINT=$GATSBY_GRAPHQL_ENDPOINT"',
+              'echo "GATSBY_API_KEY=$GATSBY_API_KEY"',
             ],
           },
           build: {
