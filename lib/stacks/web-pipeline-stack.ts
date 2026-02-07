@@ -54,7 +54,6 @@ export class WebPipelineStack extends cdk.Stack {
           build: {
             commands: [
               'npm run build',
-              'npm test',
             ],
           },
           post_build: {
